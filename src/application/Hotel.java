@@ -3,6 +3,7 @@ package application;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Hotel {
 	private ArrayList<Room> rooms;
@@ -126,5 +127,27 @@ public class Hotel {
 		}
 		
 		return false;
+	}
+
+	public Room availableRoom(String roomType, String checkIn, String checkOut) {
+		boolean overlapping = false;
+		
+		for (Room hotelRoom : getRooms()) {
+			if (hotelRoom.getRoomType().equals(roomType)) {					
+				HashMap<Integer, ArrayList<String>> roomBookings = hotelRoom.getBookings();
+				for (Integer key : roomBookings.keySet()) {
+					ArrayList<String> bookedDatesOnRoom = roomBookings.get(key);
+					if (hotelRoom.dateOverLapping(checkIn, checkOut, bookedDatesOnRoom.get(0), bookedDatesOnRoom.get(1))) {
+						overlapping = true;
+					}
+				}
+				
+				if (!overlapping) {
+					return hotelRoom;
+				}
+			}
+		}
+		
+		return null;
 	}
 }

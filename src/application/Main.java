@@ -44,7 +44,6 @@ public class Main extends Application {
 			Booker booker = new Booker(hotel);			
 			booker.addBooking();
 			
-			System.out.println("Hej");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

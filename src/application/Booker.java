@@ -32,17 +32,20 @@ public class Booker implements Booking {
 		Guest guest = guestName();
 		
 		String roomType = roomType(checkIn, checkOut);
-		Room room = new Room(roomType, getHotel());
-				
+		
 		Random random = new Random();
 		int bookingNumber = getHotel().bookingNumber(1 + random.nextInt(1000));
-		
+			
+		Room room = getHotel().availableRoom(roomType, checkIn, checkOut);
+		room.addBooking(bookingNumber, checkIn, checkOut);
+				
 		System.out.println("Your booking number: " + bookingNumber);
-		
 		BookingTicket bookingTicket = new BookingTicket(room, checkIn, checkOut, guest, bookingNumber);
 		guest.setBookingTicket(bookingTicket);
 		hotel.getGuestBook().addGuest(guest);
+		
 	}
+	
 	
 	public String reservationDate() {
 		String reservationDate = userInput();
@@ -57,6 +60,7 @@ public class Booker implements Booking {
 		
 		return reservationDate;
 	}
+	
 	
 	public boolean validateDateFormat(String dateFormat) {
 		if (dateFormat.length() != 10) {
@@ -79,6 +83,7 @@ public class Booker implements Booking {
 		
 		return true;
 	}
+	
 
 	public boolean validateThatBookingIsNotBeforeTodaysDate(String reservationDate) {
 	    LocalDate todaysDate = LocalDate.now();
@@ -86,6 +91,7 @@ public class Booker implements Booking {
 
 	    return todaysDate.isBefore(localDateAsCheckIn) || todaysDate.isEqual(localDateAsCheckIn);
 	}
+	
 	
 	public Guest guestName() {
 		Guest guest = new Guest();
