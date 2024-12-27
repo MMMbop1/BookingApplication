@@ -38,12 +38,10 @@ public class Main extends Application {
 				.limit(RoomProperties.EN_SUITE_AVAILABLE.getValue())
 				.collect(Collectors.toCollection(ArrayList::new)));
 			
-			hotel.setRooms(rooms);
+			hotel.setRooms(rooms);			
 			GuestBook guestBook = new GuestBook();
-			hotel.setGuestBook(guestBook);
-			
-			Booker booker = new Booker(hotel);
-			
+			hotel.setGuestBook(guestBook);			
+			Booker booker = new Booker(hotel);			
 			booker.addBooking();
 			
 			System.out.println("Hej");

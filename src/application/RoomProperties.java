@@ -9,7 +9,7 @@ public enum RoomProperties {
 	EN_SUITE_PRICE(3000),
 	SINGLE_ROOM("Single Room"),
 	DOUBLE_ROOM("Double Room"),
-	EN_SUITE("En_Suite");
+	EN_SUITE("En Suite");
 		
 	private int value;
 	private String roomType;
@@ -21,6 +21,15 @@ public enum RoomProperties {
 	RoomProperties(String roomType) {
 		this.roomType = roomType;
 	}
+	
+    public static int getAvailabilityProperty(String roomType) {
+        return switch (roomType) {
+            case "Single Room" -> SINGLE_ROOMS_AVAILABLE.getValue();
+            case "Double Room" -> DOUBLE_ROOMS_AVAILABLE.getValue();
+            case "En Suite" -> EN_SUITE_AVAILABLE.getValue();
+            default -> throw new IllegalArgumentException("Invalid room type: " + roomType);
+        };
+    }
 	
 	public String getRoomType() {
 		return roomType;

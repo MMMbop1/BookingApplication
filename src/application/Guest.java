@@ -7,13 +7,13 @@ public class Guest implements Serializable {
 	
 	private static final long serialVersionUID = 1L;	
 	private String name;	
-	private ArrayList<BookingTicket> bookingTickets;
+	private BookingTicket bookingTicket;
 	
 	public Guest() {}
 
-	public Guest(String name, ArrayList<BookingTicket> bookingTickets) {
+	public Guest(String name, BookingTicket bookingTicket) {
 		this.name = name;
-		this.bookingTickets = bookingTickets;
+		this.bookingTicket = bookingTicket;
 	}
 
 	public String getName() {
@@ -24,12 +24,12 @@ public class Guest implements Serializable {
 		this.name = name;
 	}
 
-	public ArrayList<BookingTicket> getBookingTickets() {
-		return bookingTickets;
+	public BookingTicket getBookingTicket() {
+		return bookingTicket;
 	}
 
-	public void setBookingTickets(ArrayList<BookingTicket> bookingTickets) {
-		this.bookingTickets = bookingTickets;
+	public void setBookingTicket(BookingTicket bookingTicket) {
+		this.bookingTicket = bookingTicket;
 	}
 		
 }

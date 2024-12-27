@@ -3,7 +3,7 @@ package application;
 import java.util.ArrayList;
 
 public class GuestBook {
-	private ArrayList<Guest> guests;
+	private ArrayList<Guest> guests = new ArrayList<>();
 	
 	public GuestBook() {}
 
@@ -19,5 +19,9 @@ public class GuestBook {
 		this.guests = guestBook;
 	}
 	
-	
+	public void addGuest(Guest guest) {
+		ArrayList<Guest> guests = getGuests();
+		guests.add(guest);
+		setGuests(guests);
+	}
 }

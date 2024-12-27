@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Random;
 
 public class Booker implements Booking {
 	
@@ -29,6 +31,17 @@ public class Booker implements Booking {
 				
 		Guest guest = guestName();
 		
+		String roomType = roomType(checkIn, checkOut);
+		Room room = new Room(roomType, getHotel());
+				
+		Random random = new Random();
+		int bookingNumber = getHotel().bookingNumber(1 + random.nextInt(1000));
+		
+		System.out.println("Your booking number: " + bookingNumber);
+		
+		BookingTicket bookingTicket = new BookingTicket(room, checkIn, checkOut, guest, bookingNumber);
+		guest.setBookingTicket(bookingTicket);
+		hotel.getGuestBook().addGuest(guest);
 	}
 	
 	public String reservationDate() {
@@ -84,45 +97,34 @@ public class Booker implements Booking {
 	}
 
 	public String roomType(String checkIn, String checkOut) {
-		int availableSingleRooms = availableRooms(checkIn, checkOut, RoomProperties.SINGLE_ROOM.getRoomType());
-		int availableDoubleRooms = availableRooms(checkIn, checkOut, RoomProperties.DOUBLE_ROOM.getRoomType());
-		int availableEnSuite = availableRooms(checkIn, checkOut, RoomProperties.EN_SUITE.getRoomType());
+		int availableSingleRooms = getHotel().availableRooms(checkIn, checkOut, RoomProperties.SINGLE_ROOM.getRoomType());
+		int availableDoubleRooms = getHotel().availableRooms(checkIn, checkOut, RoomProperties.DOUBLE_ROOM.getRoomType());
+		int availableEnSuite = getHotel().availableRooms(checkIn, checkOut, RoomProperties.EN_SUITE.getRoomType());
+		
+		if (availableSingleRooms + availableDoubleRooms + availableEnSuite == 0) {
+			System.out.println("Unfortunately we are fully booked this time period.");
+			throw new RuntimeException("Fully booked...");
+		}
+		
+		System.out.println("1) Single room (" + availableSingleRooms + " available)");
+		System.out.println("2) Double room (" + availableDoubleRooms + " available)");
+		System.out.println("3) En suite (" + availableEnSuite + " available)");
+		System.out.println("0) Cancel Booking");
 
+		String choice = "";
 		
-		return null;
-	}
-	
-	public int availableRooms(String checkIn, String checkOut, String roomType) {
-		return Math.max(RoomProperties.SINGLE_ROOMS_AVAILABLE.getValue() - numberOfBookedRooms(checkIn, checkOut, roomType), 0);
-	}
-	
-	public int numberOfBookedRooms(String checkIn, String checkOut, String roomType) {		
-		LocalDate localDateAsCheckIn = LocalDate.parse(checkIn, DATE_FORMAT);
-		LocalDate localDateAsCheckOut = LocalDate.parse(checkOut, DATE_FORMAT);
-		
-		ArrayList<ArrayList<LocalDate>> bookingsRoomType = new ArrayList<>();		
-		ArrayList<BookingTicket> Bookingtickets = new ArrayList<>();
-		
-		for (Guest guest : getHotel().getGuestBook().getGuests()) {
-			Bookingtickets.addAll(guest.getBookingTickets());
+		switch(userInputInt()) {
+			case 0 -> throw new RuntimeException("Booking canceled");
+			case 1 -> choice = RoomProperties.SINGLE_ROOM.getRoomType();
+			case 2 -> choice = RoomProperties.DOUBLE_ROOM.getRoomType();
+			case 3 -> choice = RoomProperties.EN_SUITE.getRoomType();
+			default -> {
+				System.out.println("Wrong input, must be 0-3");
+				roomType(checkIn, checkOut);
+			}
 		}
 		
-		for (BookingTicket bookingTicket : Bookingtickets) {
-			if(bookingTicket.getRoom().getRoomType().equals(roomType)) {
-				ArrayList<LocalDate> bookedRooms = new ArrayList<>();
-				bookedRooms.add(LocalDate.parse(bookingTicket.getCheckIn(), DATE_FORMAT));
-				bookedRooms.add(LocalDate.parse(bookingTicket.getCheckIn(), DATE_FORMAT));
-				bookingsRoomType.add(bookedRooms);
-			}	
-		}
-		
-		return (int) bookingsRoomType.stream()
-				.filter(val -> isOverLapping(localDateAsCheckIn, localDateAsCheckOut, val.get(0), val.get(1)))
-				.count();
-	}
-	
-	public boolean isOverLapping(LocalDate checkIn, LocalDate checkOut, LocalDate bookedCheckIn, LocalDate bookedCheckout) {
-		return !((checkOut.isBefore(bookedCheckIn) || checkOut.isEqual(bookedCheckIn)) || (checkIn.isAfter(bookedCheckout) || checkIn.isEqual(bookedCheckout)));
+		return choice;
 	}
 	
 	@Override
@@ -167,6 +169,16 @@ public class Booker implements Booking {
 		} catch(IOException ex) {
 	        throw new RuntimeException("Something went horrible wrong!");
 		}
+	}
+	
+	public int userInputInt() {
+	    try {
+	    	return Integer.parseInt(reader.readLine()); 
+	    } catch(NumberFormatException ex1) {
+	    	throw new InputMismatchException("Wrong input, must be an integer!");
+	    } catch (IOException ex2) {
+	        throw new RuntimeException("Something went horrible wrong!");
+	    }
 	}
 	
 	public BufferedReader getReader() {
