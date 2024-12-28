@@ -8,24 +8,27 @@ import java.util.HashMap;
 public class Room {
 	private String roomType;
 	private Hotel hotel;
-	private HashMap<Integer, ArrayList<String>> bookings = new HashMap<>();		
 	private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+	private ArrayList<BookingTicket> bookingTickets = new ArrayList<>();
+	
 	public Room() {}
 	
+
 	public Room(String roomType, Hotel hotel) {
 		this.roomType = roomType;
 		this.hotel = hotel;
 	}
+	
+	public ArrayList<BookingTicket> getBookingTickets() {
+		return bookingTickets;
+	}
 
-	public HashMap<Integer, ArrayList<String>> getBookings() {
-		return bookings;
+
+	public void setBookingTickets(ArrayList<BookingTicket> bookingTickets) {
+		this.bookingTickets = bookingTickets;
 	}
-	
-	public void setBookings(HashMap<Integer, ArrayList<String>> bookings) {
-		this.bookings = bookings;
-	}
-	
+
+
 	public String getRoomType() {
 		return roomType;
 	}
@@ -42,13 +45,10 @@ public class Room {
 		this.hotel = hotel;
 	}
 	
-	public void addBooking(int bookingNumber, String checkIn, String checkOut) {
-		HashMap<Integer, ArrayList<String>> bookings = getBookings();
-		ArrayList<String> dates = new ArrayList<>();
-		dates.add(checkIn);
-		dates.add(checkOut);		
-		bookings.put(bookingNumber, dates);
-		setBookings(bookings);		
+	public void addBooking(BookingTicket bookingTicket) {
+		ArrayList<BookingTicket> bookingTickets = getBookingTickets();
+		bookingTickets.add(bookingTicket);
+		setBookingTickets(bookingTickets);
 	}
 	
 	public boolean dateOverLapping(String checkIn, String checkOut, String bookedCheckIn, String bookedCheckout) {

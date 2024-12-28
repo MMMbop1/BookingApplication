@@ -29,20 +29,22 @@ public class Main extends Application {
 				.collect(Collectors.toCollection(ArrayList::new)));
 			
 			rooms.addAll(Stream.generate(() -> 
-				new Room(RoomProperties.SINGLE_ROOM.getRoomType(), hotel))
+				new Room(RoomProperties.DOUBLE_ROOM.getRoomType(), hotel))
 				.limit(RoomProperties.DOUBLE_ROOMS_AVAILABLE.getValue())
 				.collect(Collectors.toCollection(ArrayList::new)));
 			
 			rooms.addAll(Stream.generate(() -> 
-				new Room(RoomProperties.SINGLE_ROOM.getRoomType(), hotel))
+				new Room(RoomProperties.EN_SUITE.getRoomType(), hotel))
 				.limit(RoomProperties.EN_SUITE_AVAILABLE.getValue())
 				.collect(Collectors.toCollection(ArrayList::new)));
 			
 			hotel.setRooms(rooms);			
 			GuestBook guestBook = new GuestBook();
 			hotel.setGuestBook(guestBook);			
-			Booker booker = new Booker(hotel);			
-			booker.addBooking();
+			Booker booker = new Booker(hotel);
+			while(true) {
+				booker.addBooking();				
+			}
 			
 		} catch(Exception e) {
 			e.printStackTrace();

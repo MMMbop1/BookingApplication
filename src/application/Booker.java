@@ -36,11 +36,11 @@ public class Booker implements Booking {
 		Random random = new Random();
 		int bookingNumber = getHotel().bookingNumber(1 + random.nextInt(1000));
 			
-		Room room = getHotel().availableRoom(roomType, checkIn, checkOut);
-		room.addBooking(bookingNumber, checkIn, checkOut);
+		Room room = getHotel().availableRoom(roomType, checkIn, checkOut);		
 				
 		System.out.println("Your booking number: " + bookingNumber);
 		BookingTicket bookingTicket = new BookingTicket(room, checkIn, checkOut, guest, bookingNumber);
+		room.addBooking(bookingTicket);
 		guest.setBookingTicket(bookingTicket);
 		hotel.getGuestBook().addGuest(guest);
 		

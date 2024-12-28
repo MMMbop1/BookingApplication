@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Hotel {
 	private ArrayList<Room> rooms;
@@ -48,7 +50,7 @@ public class Hotel {
 		ArrayList<ArrayList<LocalDate>> bookingsRoomType = new ArrayList<>();
 		
 		for (Guest guest : getGuestBook().getGuests()) {
-			if(guest.getBookingTicket().getRoom().equals(roomType)) {
+			if(guest.getBookingTicket().getRoom().getRoomType().equals(roomType)) {
 				ArrayList<LocalDate> bookedRooms = new ArrayList<>();
 				bookedRooms.add(LocalDate.parse(guest.getBookingTicket().getCheckIn(), DATE_FORMAT));
 				bookedRooms.add(LocalDate.parse(guest.getBookingTicket().getCheckOut(), DATE_FORMAT));
@@ -129,22 +131,25 @@ public class Hotel {
 		return false;
 	}
 
-	public Room availableRoom(String roomType, String checkIn, String checkOut) {
-		boolean overlapping = false;
+	public Room availableRoom(String roomType, String checkIn, String checkOut) {				
+		ArrayList<Room> rooms = new ArrayList<>(getRooms()
+				.stream()
+				.filter(val -> val.getRoomType().equals(roomType))
+				.collect(Collectors.toList()));
 		
-		for (Room hotelRoom : getRooms()) {
-			if (hotelRoom.getRoomType().equals(roomType)) {					
-				HashMap<Integer, ArrayList<String>> roomBookings = hotelRoom.getBookings();
-				for (Integer key : roomBookings.keySet()) {
-					ArrayList<String> bookedDatesOnRoom = roomBookings.get(key);
-					if (hotelRoom.dateOverLapping(checkIn, checkOut, bookedDatesOnRoom.get(0), bookedDatesOnRoom.get(1))) {
-						overlapping = true;
-					}
+		boolean overlapping;
+		
+		for (Room room : rooms) {
+			overlapping = false;
+			
+			for (BookingTicket bookingTicket : room.getBookingTickets()) {
+				if (room.dateOverLapping(checkIn, checkOut, bookingTicket.getCheckIn(), bookingTicket.getCheckOut())) {
+					overlapping = true;
 				}
-				
-				if (!overlapping) {
-					return hotelRoom;
-				}
+			}
+			
+			if (!overlapping) {
+				return room;
 			}
 		}
 		
