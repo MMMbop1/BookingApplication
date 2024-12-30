@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Random;
 
@@ -135,20 +136,47 @@ public class Booker implements Booking {
 	
 	@Override
 	public ArrayList<BookingTicket> getAllBookings() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<BookingTicket> bookingTickets = new ArrayList<>();
+		
+		for (Guest guest : getHotel().getGuestBook().getGuests()) {
+			bookingTickets.add(guest.getBookingTicket());
+		}
+				
+		return bookingTickets;
 	}
 
 	@Override
 	public BookingTicket getBookingByBookingId() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("What bookingId?");
+		int bookingNumber = userInputInt();
+
+		ArrayList<BookingTicket> bookingTickets = getAllBookings();
+		BookingTicket bookingTicket = null;
+		
+		for (BookingTicket ticket : bookingTickets) {
+			if (ticket.getBookingNumber() == bookingNumber) {
+				bookingTicket = ticket;
+			}
+		}
+		
+		return bookingTicket;
 	}
 
 	@Override
-	public BookingTicket getBookingByName() {
-		// TODO Auto-generated method stub
-		return null;
+	public Guest getBookingByName() {
+		System.out.println("What name should I search for to get your booking?");
+		String bookingName = userInput();
+
+		ArrayList<Guest> guests = getHotel().getGuestBook().getGuests();
+		Guest guest = null;
+		
+		for (Guest bookedGuest : guests) {
+			if (bookedGuest.getName().equals(bookingName)) {
+				guest = bookedGuest;
+			}
+		}
+		
+		return guest;
 	}
 
 	@Override

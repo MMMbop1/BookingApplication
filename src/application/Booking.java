@@ -10,7 +10,7 @@ public interface Booking {
 	
 	public BookingTicket getBookingByBookingId();
 	
-	public BookingTicket getBookingByName();
+	public Guest getBookingByName();
 	
 	public void removeBookingByBookingNumber();
 	

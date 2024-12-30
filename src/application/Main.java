@@ -42,9 +42,10 @@ public class Main extends Application {
 			GuestBook guestBook = new GuestBook();
 			hotel.setGuestBook(guestBook);			
 			Booker booker = new Booker(hotel);
-			while(true) {
-				booker.addBooking();				
-			}
+			Menu menu = new Menu(booker);
+			
+			menu.userOptions();
+			
 			
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -57,5 +57,13 @@ public class BookingTicket {
 	public void setBookingNumber(int bookingNumber) {
 		this.bookingNumber = bookingNumber;
 	}
+
+	@Override
+	public String toString() {
+		return "BookingTicket [room=" + room.getRoomType() + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", guest=" + guest.getName()
+				+ ", bookingNumber=" + bookingNumber + "]";
+	}
+	
+	
 	
 }
