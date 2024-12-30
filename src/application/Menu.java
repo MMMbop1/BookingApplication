@@ -48,7 +48,14 @@ public class Menu {
 						}
 					}
 				}
-				case 4 -> System.out.println(booker.getBookingByName().getBookingTicket().toString());
+				case 4 -> {
+					Guest guest = booker.getBookingByName();
+					if (guest == null) {
+						System.out.println("No booking found for given name");
+					} else {
+						System.out.println(guest.getBookingTicket().toString());						
+					}					
+				}
 //				case 5 -> bookingUtil.removeBookingByBookingNumber();
 //				case 6 -> bookingUtil.getRoomsAvailableForGivenTimePeriod();
 //				case 7 -> bookingUtil.writeToFile();

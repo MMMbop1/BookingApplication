@@ -181,8 +181,18 @@ public class Booker implements Booking {
 
 	@Override
 	public void removeBookingByBookingNumber() {
-		// TODO Auto-generated method stub
+		System.out.println("What bookingId to remove?");
+		int bookingNumber = userInputInt();
+
+		ArrayList<BookingTicket> bookingTickets = getAllBookings();
 		
+		for (BookingTicket ticket : bookingTickets) {
+			if (ticket.getBookingNumber() == bookingNumber) {
+				continue;
+			}
+			bookingTickets.add(ticket);
+		}
+
 	}
 
 	@Override
