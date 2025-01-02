@@ -24,21 +24,21 @@ public class Main extends Application {
 			ArrayList<Room> rooms = new ArrayList<>();
 			
 			rooms.addAll(Stream.generate(() -> 
-				new Room(RoomProperties.SINGLE_ROOM.getRoomType(), hotel))
+				new Room(RoomProperties.SINGLE_ROOM.getRoomType()))
 				.limit(RoomProperties.SINGLE_ROOMS_AVAILABLE.getValue())
 				.collect(Collectors.toCollection(ArrayList::new)));
 			
 			rooms.addAll(Stream.generate(() -> 
-				new Room(RoomProperties.DOUBLE_ROOM.getRoomType(), hotel))
+				new Room(RoomProperties.DOUBLE_ROOM.getRoomType()))
 				.limit(RoomProperties.DOUBLE_ROOMS_AVAILABLE.getValue())
 				.collect(Collectors.toCollection(ArrayList::new)));
 			
 			rooms.addAll(Stream.generate(() -> 
-				new Room(RoomProperties.EN_SUITE.getRoomType(), hotel))
+				new Room(RoomProperties.EN_SUITE.getRoomType()))
 				.limit(RoomProperties.EN_SUITE_AVAILABLE.getValue())
 				.collect(Collectors.toCollection(ArrayList::new)));
 			
-			hotel.setRooms(rooms);			
+			hotel.setRooms(rooms);
 			GuestBook guestBook = new GuestBook();
 			hotel.setGuestBook(guestBook);			
 			Booker booker = new Booker(hotel);

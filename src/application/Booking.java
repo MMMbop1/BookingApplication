@@ -14,5 +14,5 @@ public interface Booking {
 	
 	public void removeBookingByBookingNumber();
 	
-	public ArrayList<Room> roomsAvailableTimePeriod();
+	public String roomsAvailableTimePeriod();
 }

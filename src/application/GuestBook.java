@@ -24,4 +24,17 @@ public class GuestBook {
 		guests.add(guest);
 		setGuests(guests);
 	}
+	
+	public void removeGuestByBookingNumber(int bookingNumber) {
+		ArrayList<Guest> guests = getGuests();
+		
+		for (Guest guest : guests) {
+			if (guest.getBookingTicket().getBookingNumber() == bookingNumber) {
+				guest.getBookingTicket().getRoom().removeBookingTicket(bookingNumber);
+			}
+		}
+		
+		guests.removeIf(guest -> guest.getBookingTicket().getBookingNumber() == bookingNumber);
+		setGuests(guests);
+	}
 }

@@ -15,7 +15,8 @@ public class Booker implements Booking {
 	private Hotel hotel;
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+	private Serializer serializer = new Serializer();
+	
 	public Booker() {}
 	
 	public Booker(Hotel hotel) {
@@ -183,22 +184,34 @@ public class Booker implements Booking {
 	public void removeBookingByBookingNumber() {
 		System.out.println("What bookingId to remove?");
 		int bookingNumber = userInputInt();
-
-		ArrayList<BookingTicket> bookingTickets = getAllBookings();
 		
-		for (BookingTicket ticket : bookingTickets) {
-			if (ticket.getBookingNumber() == bookingNumber) {
-				continue;
-			}
-			bookingTickets.add(ticket);
-		}
-
+		getHotel().getGuestBook().removeGuestByBookingNumber(bookingNumber);
 	}
 
 	@Override
-	public ArrayList<Room> roomsAvailableTimePeriod() {
-		// TODO Auto-generated method stub
-		return null;
+	public String roomsAvailableTimePeriod() {
+		System.out.println("What date for checkin? YYYY-MM-DD");
+		String checkIn = reservationDate();
+		
+		System.out.println("What date for check out? YYYY-MM-DD");
+		String checkOut = reservationDate();		
+				
+		
+		int availableSingleRooms = getHotel().availableRooms(checkIn, checkOut, RoomProperties.SINGLE_ROOM.getRoomType());
+		int availableDoubleRooms = getHotel().availableRooms(checkIn, checkOut, RoomProperties.DOUBLE_ROOM.getRoomType());
+		int availableEnSuite = getHotel().availableRooms(checkIn, checkOut, RoomProperties.EN_SUITE.getRoomType());
+		
+		if (availableSingleRooms + availableDoubleRooms + availableEnSuite == 0) {
+			System.out.println("Unfortunately we are fully booked this time period.");
+			throw new RuntimeException("Fully booked...");
+		}
+		
+	    String roomsAvailable = 
+	            "1) Single room (" + availableSingleRooms + " available)\n" +
+	            "2) Double room (" + availableDoubleRooms + " available)\n" +
+	            "3) En suite (" + availableEnSuite + " available)";
+	        
+	    return roomsAvailable;	
 	}
 	
 	public String userInput() {
@@ -223,6 +236,11 @@ public class Booker implements Booking {
 	    } catch (IOException ex2) {
 	        throw new RuntimeException("Something went horrible wrong!");
 	    }
+	}
+	
+	public void saveToFile() {
+		serializer.writeObject(getHotel().getGuestBook().getGuests());
+		System.out.println("Wrote guests to file");
 	}
 	
 	public BufferedReader getReader() {

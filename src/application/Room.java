@@ -7,16 +7,14 @@ import java.util.HashMap;
 
 public class Room {
 	private String roomType;
-	private Hotel hotel;
 	private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private ArrayList<BookingTicket> bookingTickets = new ArrayList<>();
 	
 	public Room() {}
 	
 
-	public Room(String roomType, Hotel hotel) {
+	public Room(String roomType) {
 		this.roomType = roomType;
-		this.hotel = hotel;
 	}
 	
 	public ArrayList<BookingTicket> getBookingTickets() {
@@ -36,13 +34,11 @@ public class Room {
 	public void setRoomType(String roomType) {
 		this.roomType = roomType;
 	}
-
-	public Hotel getHotel() {
-		return hotel;
-	}
-
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
+	
+	public void removeBookingTicket(int bookingNumber) {
+		ArrayList<BookingTicket> bookingTickets = getBookingTickets();
+		bookingTickets.removeIf(ticket -> ticket.getBookingNumber() == bookingNumber);
+		setBookingTickets(bookingTickets);
 	}
 	
 	public void addBooking(BookingTicket bookingTicket) {

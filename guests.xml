@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="21.0.1" class="java.beans.XMLDecoder">
+ <object class="application.Guest" id="Guest0">
+  <void property="bookingTicket">
+   <object class="application.BookingTicket" id="BookingTicket0">
+    <void property="bookingNumber">
+     <int>989</int>
+    </void>
+    <void property="checkIn">
+     <string>2025-01-10</string>
+    </void>
+    <void property="checkOut">
+     <string>2025-01-12</string>
+    </void>
+    <void property="guest">
+     <object idref="Guest0"/>
+    </void>
+    <void property="room">
+     <object class="application.Room" id="Room0">
+      <void property="bookingTickets">
+       <void method="add">
+        <object idref="BookingTicket0"/>
+       </void>
+      </void>
+      <void property="roomType">
+       <string>Single Room</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void property="name">
+   <string>Ludvig</string>
+  </void>
+ </object>
+ <object class="application.Guest" id="Guest1">
+  <void property="bookingTicket">
+   <object class="application.BookingTicket" id="BookingTicket1">
+    <void property="bookingNumber">
+     <int>143</int>
+    </void>
+    <void property="checkIn">
+     <string>2025-01-10</string>
+    </void>
+    <void property="checkOut">
+     <string>2025-01-20</string>
+    </void>
+    <void property="guest">
+     <object idref="Guest1"/>
+    </void>
+    <void property="room">
+     <object class="application.Room" id="Room1">
+      <void property="bookingTickets">
+       <void method="add">
+        <object idref="BookingTicket1"/>
+       </void>
+      </void>
+      <void property="roomType">
+       <string>En Suite</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void property="name">
+   <string>Erika</string>
+  </void>
+ </object>
+</java>

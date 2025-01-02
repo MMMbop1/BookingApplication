@@ -56,9 +56,9 @@ public class Menu {
 						System.out.println(guest.getBookingTicket().toString());						
 					}					
 				}
-//				case 5 -> bookingUtil.removeBookingByBookingNumber();
-//				case 6 -> bookingUtil.getRoomsAvailableForGivenTimePeriod();
-//				case 7 -> bookingUtil.writeToFile();
+				case 5 -> booker.removeBookingByBookingNumber();
+				case 6 -> System.out.println(booker.roomsAvailableTimePeriod());
+				case 7 -> booker.saveToFile();
 //				case 8 -> bookingUtil.readFile();
 				}
 			} catch(RuntimeException ex) {
@@ -83,8 +83,8 @@ public class Menu {
 				
 				0) Avsluta program
 				1) Göra en bokning
-				2) Se alla bokningar
-				3) Sök bokning efter bokningsnummer
+				2) Sök bokning efter bokningsnummer
+				3) Se alla bokningar
 				4) Sök bokning efter namn
 				5) Ta bort bokning efter bokningsnummer
 				6) Lediga rum för datum
