@@ -4,7 +4,7 @@
   <void property="bookingTicket">
    <object class="application.BookingTicket" id="BookingTicket0">
     <void property="bookingNumber">
-     <int>989</int>
+     <int>358</int>
     </void>
     <void property="checkIn">
      <string>2025-01-10</string>
@@ -32,18 +32,21 @@
   <void property="name">
    <string>Ludvig</string>
   </void>
+  <void property="phoneNumber">
+   <string>073225232</string>
+  </void>
  </object>
  <object class="application.Guest" id="Guest1">
   <void property="bookingTicket">
    <object class="application.BookingTicket" id="BookingTicket1">
     <void property="bookingNumber">
-     <int>143</int>
+     <int>370</int>
     </void>
     <void property="checkIn">
      <string>2025-01-10</string>
     </void>
     <void property="checkOut">
-     <string>2025-01-20</string>
+     <string>2025-01-25</string>
     </void>
     <void property="guest">
      <object idref="Guest1"/>
@@ -63,7 +66,10 @@
    </object>
   </void>
   <void property="name">
-   <string>Erika</string>
+   <string>Erik</string>
+  </void>
+  <void property="phoneNumber">
+   <string>102391231</string>
   </void>
  </object>
 </java>

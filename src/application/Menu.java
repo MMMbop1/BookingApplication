@@ -59,7 +59,7 @@ public class Menu {
 				case 5 -> booker.removeBookingByBookingNumber();
 				case 6 -> System.out.println(booker.roomsAvailableTimePeriod());
 				case 7 -> booker.saveToFile();
-//				case 8 -> bookingUtil.readFile();
+				case 8 -> booker.readObject();
 				}
 			} catch(RuntimeException ex) {
 				System.out.println(ex.getMessage());

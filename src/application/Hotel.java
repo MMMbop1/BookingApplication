@@ -43,7 +43,7 @@ public class Hotel {
 		return Math.max(RoomProperties.getAvailabilityProperty(roomType) - numberOfBookedRooms(checkIn, checkOut, roomType), 0);
 	}
 	
-	public int numberOfBookedRooms(String checkIn, String checkOut, String roomType) {		
+	public int numberOfBookedRooms(String checkIn, String checkOut, String roomType) {
 		LocalDate localDateAsCheckIn = LocalDate.parse(checkIn, DATE_FORMAT);
 		LocalDate localDateAsCheckOut = LocalDate.parse(checkOut, DATE_FORMAT);
 		

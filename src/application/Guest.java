@@ -6,14 +6,24 @@ import java.util.ArrayList;
 public class Guest implements Serializable {
 	
 	private static final long serialVersionUID = 1L;	
-	private String name;	
+	private String name;
+	private String phoneNumber;
 	private BookingTicket bookingTicket;
 	
 	public Guest() {}
 
-	public Guest(String name, BookingTicket bookingTicket) {
+	public Guest(String name, BookingTicket bookingTicket, String phoneNumber) {
 		this.name = name;
 		this.bookingTicket = bookingTicket;
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getName() {

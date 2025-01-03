@@ -32,20 +32,25 @@ public class Booker implements Booking {
 		String checkOut = reservationDate();		
 				
 		Guest guest = guestName();
+		guest.setPhoneNumber(addPhoneNumber());
 		
 		String roomType = roomType(checkIn, checkOut);
 		
 		Random random = new Random();
 		int bookingNumber = getHotel().bookingNumber(1 + random.nextInt(1000));
-			
+		
 		Room room = getHotel().availableRoom(roomType, checkIn, checkOut);		
 				
 		System.out.println("Your booking number: " + bookingNumber);
 		BookingTicket bookingTicket = new BookingTicket(room, checkIn, checkOut, guest, bookingNumber);
 		room.addBooking(bookingTicket);
 		guest.setBookingTicket(bookingTicket);
-		hotel.getGuestBook().addGuest(guest);
-		
+		hotel.getGuestBook().addGuest(guest);		
+	}
+	
+	public String addPhoneNumber() {
+		System.out.println("What is your phoneNumber?");
+		return userInput();
 	}
 	
 	
@@ -240,7 +245,12 @@ public class Booker implements Booking {
 	
 	public void saveToFile() {
 		serializer.writeObject(getHotel().getGuestBook().getGuests());
-		System.out.println("Wrote guests to file");
+		System.out.println("Guests saved to file");
+	}
+	
+	public void readObject() {
+		ArrayList<Guest> guests = serializer.readObject();
+		getHotel().getGuestBook().setGuests(guests);
 	}
 	
 	public BufferedReader getReader() {
