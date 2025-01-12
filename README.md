@@ -26,6 +26,9 @@ Java Version: 22
 
 JavaFX Framework: Used for structuring the application, with potential for GUI integration in future versions.
 
+The application's design adheres to the principles of OOP and is visually represented by the UML class diagram below:
+
 ![UML Class Diagram:](UML.PNG)
 
-The application's design adheres to the principles of OOP and is visually represented by the UML class diagram below:
+Author:
+Ludvig Ogenblad
