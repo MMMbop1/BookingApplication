@@ -22,7 +22,7 @@ Serialization and Deserialization: Ensures data persistence by saving and loadin
 
 The application is guaranteed to run with the following configuration:
 
-Java Version: 22
+Java Version: JAVA-SE21
 
 JavaFX Framework: Used for structuring the application, with potential for GUI integration in future versions.
 
