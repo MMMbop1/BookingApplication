@@ -88,7 +88,7 @@ public class Menu {
 				4) Sök bokning efter namn
 				5) Ta bort bokning efter bokningsnummer
 				6) Lediga rum för datum
-				7) Överför aktuella bokning till fil
+				7) Överför aktuella bokningar till fil
 				8) Läs fil och överför till Aktuella bokningar i programmet
 			
 				***********************************************************************************************

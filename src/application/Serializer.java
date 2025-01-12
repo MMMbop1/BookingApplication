@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class Serializer {
 
-	private final String fileName = "guests.xml";
+	private final String FILE_NAME = "guests.xml";
 	
 	public Serializer() {}
 	
 	public String getFileName() {
-		return fileName;
+		return FILE_NAME;
 	}
 
 	public void writeObject(ArrayList<Guest> guests) {
