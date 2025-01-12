@@ -1,10 +1,10 @@
-Hotel Booking Application
+## Hotel Booking Application
 
-Overview
+### Overview
 
 A proof-of-concept application for managing hotel room bookings using an object-oriented programming (OOP) approach. The application is currently console-based but is structured to allow future enhancements with a JavaFX GUI framework.
 
-Features
+### Features
 
 The application provides the following functionalities:
 
@@ -18,7 +18,7 @@ Find Available Rooms: Allows users to search for rooms that are available for bo
 
 Serialization and Deserialization: Ensures data persistence by saving and loading the application state.
 
-Technical Requirements
+#### Technical Requirements
 
 The application is guaranteed to run with the following configuration:
 
@@ -30,5 +30,5 @@ The application's design adheres to the principles of OOP and is visually repres
 
 ![UML Class Diagram:](UML.PNG)
 
-Author:
+**Author:**
 Ludvig Ogenblad
